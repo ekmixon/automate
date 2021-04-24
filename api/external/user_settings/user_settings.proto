@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package chef.automate.api.user_settings;
+option go_package = "github.com/chef/automate/api/external/user_settings";
+
+import "google/api/annotations.proto";
+import "external/annotations/iam/annotations.proto";
+import "external/user_settings/request/settings.proto";
+import "external/user_settings/response/settings.proto";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+// UserSettings allows accessing of user settings
+service UserSettingsService {
+	//
+	// Global
+	//
+
+	// GetUserSettings returns the aggregate status across all data lifecycle jobs
+	rpc GetUserSettings(GetUserSettingsRequest) returns (GetUserSettingsResponse) {
+		option (google.api.http).get = "/api/v0/user/{id}/settings";
+		option (chef.automate.api.iam.policy).resource = "global:userSettings";
+		option (chef.automate.api.iam.policy).action = "global:userSettings:get";
+	};
+
+	// UpdateUserSettings provides a singular endpoint for configuring all data lifecycle jobs
+	rpc UpdateUserSettings(UpdateUserSettingsRequest) returns (UpdateUserSettingsResponse) {
+		option (google.api.http) = {
+			put: "/api/v0/user/{id}/settings";
+			body: "*";
+		};
+		option (chef.automate.api.iam.policy).resource = "global:userSettings";
+		option (chef.automate.api.iam.policy).action = "global:userSettings:update";
+	};
+}
+
+
+
+
+
+
+
+
+
