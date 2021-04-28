@@ -16,7 +16,7 @@ func init() {
   "paths": {
     "/api/v0/user/{id}/settings": {
       "get": {
-        "summary": "GetUserSettings returns the aggregate status across all data lifecycle jobs",
+        "summary": "GetUserSettings returns all of the preferences for a given user",
         "operationId": "UserSettingsService_GetUserSettings",
         "responses": {
           "200": {
@@ -45,8 +45,38 @@ func init() {
           "UserSettingsService"
         ]
       },
+      "delete": {
+        "summary": "DeleteUserSettings deletes all settings for a given user",
+        "operationId": "UserSettingsService_DeleteUserSettings",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/chef.automate.api.user_settings.DeleteUserSettingsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/grpc.gateway.runtime.Error"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "ID of the user.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "UserSettingsService"
+        ]
+      },
       "put": {
-        "summary": "UpdateUserSettings provides a singular endpoint for configuring all data lifecycle jobs",
+        "summary": "UpdateUserSettings upserts all of the preferences for a given user",
         "operationId": "UserSettingsService_UpdateUserSettings",
         "responses": {
           "200": {
@@ -86,6 +116,14 @@ func init() {
     }
   },
   "definitions": {
+    "chef.automate.api.user_settings.DeleteUserSettingsResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
     "chef.automate.api.user_settings.GetUserSettingsResponse": {
       "type": "object",
       "properties": {
