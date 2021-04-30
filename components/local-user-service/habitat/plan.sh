@@ -21,6 +21,8 @@ pkg_exposes=(
 )
 pkg_binds=(
   [automate-dex]="grpc-host grpc-port port"
+  [automate-pg-gateway]="port"
+  [pg-sidecar-service]="port"
   [teams-service]="port"
   [authz-service]="port"
 )
