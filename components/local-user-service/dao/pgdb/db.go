@@ -10,7 +10,7 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 
-	"github.com/chef/automate/components/compliance-service/config"
+	"github.com/chef/automate/components/local-user-service/config"
 	"github.com/chef/automate/lib/db"
 	"github.com/chef/automate/lib/db/migrator"
 	"github.com/chef/automate/lib/logger"
@@ -70,7 +70,7 @@ func Transact(db *DB, txFunc func(*DBTrans) error) error {
 }
 
 func InitDB(connectionString string) (*DB, error) {
-	logrus.Debugf("Use PostgreSQL backend %s", connectionString)
+	logrus.Infof("Use PostgreSQL backend %s", connectionString)
 	sql, err := db.PGOpen(connectionString)
 	if err != nil {
 		return nil, errors.Wrapf(err, "Failed to open database with uri: %s", connectionString)
@@ -104,14 +104,6 @@ func runMigrations(connectionString string, migrationsPath string) error {
 func initTables(db *gorp.DbMap) {
 	// tell gorp about the tables.
 	// set auto-increment to false and tell it about our pk.
-	db.AddTableWithName(tag{}, "tags").SetKeys(false, "id")
-	db.AddTableWithName(agent{}, "agents").SetKeys(false, "id")
-	db.AddTableWithName(job{}, "jobs").SetKeys(false, "id")
-	db.AddTableWithName(JobTag{}, "jobs_tags")
-	db.AddTableWithName(JobNode{}, "jobs_nodes")
-	db.AddTableWithName(profile{}, "profiles")
-	db.AddTableWithName(JobProfile{}, "jobs_profiles")
-	db.AddTableWithName(ResultsRow{}, "results")
 	db.AddTableWithName(UserSettings{}, "user_settings")
 }
 

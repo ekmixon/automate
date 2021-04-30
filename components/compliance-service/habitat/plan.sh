@@ -38,7 +38,9 @@ pkg_deps=(
   core/grpcurl              # Used in habitat/hooks/health_check
   core/jq-static            # Used in habitat/hooks/health_check
   core/bash
+
 )
+
 
 if [[ -n "$AUTOMATE_OSS_BUILD" ]]; then
   echo "Not adding automate-compliance-profiles as AUTOMATE_OSS_BUILD is set!"

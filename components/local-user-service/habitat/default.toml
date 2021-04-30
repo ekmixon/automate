@@ -11,3 +11,12 @@ a1_user_roles_data = "a1_user_roles_data.json"
 [logger]
 format = "text"
 level = "info"
+
+[storage]
+database = "local_user_service"
+user = "local_user"
+
+[tls]
+key_contents = ""
+cert_contents = ""
+root_cert_contents = ""

@@ -9,15 +9,23 @@ import (
 	"github.com/chef/automate/lib/tls/certs"
 )
 
+// Postgres specific options
+type Postgres struct {
+	ConnectionString string `json:"uri"`
+	Database         string `json:"database"`
+	MigrationsPath   string `json:"migrations_path"`
+}
+
 // Config is the config format for the main application.
 type Config struct {
-	GRPC            string `json:"grpc"` // GRPC endpoint hosting all GRPC services
-	A1UserData      string `json:"a1_user_data"`
-	A1UserRolesData string `json:"a1_user_roles_data"`
-	Logger          Logger `json:"logger"`
-	Users           Users  `json:"users"` //!\\ only one users adapter
-	TeamsAddress    string `json:"teams_address"`
-	AuthzAddress    string `json:"authz_address"`
+	GRPC            string   `json:"grpc"` // GRPC endpoint hosting all GRPC services
+	A1UserData      string   `json:"a1_user_data"`
+	A1UserRolesData string   `json:"a1_user_roles_data"`
+	Logger          Logger   `json:"logger"`
+	Users           Users    `json:"users"` //!\\ only one users adapter
+	Postgres        Postgres `json:"postgres"`
+	TeamsAddress    string   `json:"teams_address"`
+	AuthzAddress    string   `json:"authz_address"`
 	certs.TLSConfig `json:"tls"`
 }
 

@@ -9,6 +9,7 @@ pkg_maintainer="Chef Software Inc. <support@chef.io>"
 pkg_license=('Chef-MLSA')
 pkg_upstream_url="http://github.com/chef/automate/components/local-user-service"
 pkg_deps=(
+  "${local_platform_tools_origin:-chef}/automate-platform-tools"
   core/bash
   chef/mlsa
 )
@@ -32,6 +33,15 @@ scaffolding_go_binary_list=(
   "${scaffolding_go_import_path}/cmd/users"
   "${scaffolding_go_import_path}/cmd/users-health"
 )
+
+do_install() {
+  do_default_install
+
+  build_line "Copying migration files"
+  mkdir "${pkg_prefix}/migrations"
+  cp -r dao/pgdb/migration/sql/* "${pkg_prefix}/migrations"
+}
+
 
 do_strip() {
   return 0

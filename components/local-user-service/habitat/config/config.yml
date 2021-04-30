@@ -32,3 +32,12 @@ authz_address: 127.0.0.1:{{authz-service.cfg.port}}
 logger:
   format: {{cfg.logger.format}}
   level: {{cfg.logger.level}}
+
+database: {{ cfg.storage.database }}
+migrations-path: {{ pkg.path }}/migrations
+#postgres:
+#  database: {{cfg.storage.database}}
+#  schema_path: {{pkg.path}}/schema
+#  migrations: {{pkg.path}}/migrations
+
+

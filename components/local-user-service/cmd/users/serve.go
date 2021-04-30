@@ -6,12 +6,15 @@ import (
 	"io/ioutil"
 	"os"
 
+	log "github.com/sirupsen/logrus"
+
 	"github.com/ghodss/yaml"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 
 	"github.com/chef/automate/components/local-user-service/config"
+	"github.com/chef/automate/components/local-user-service/dao/pgdb"
 	"github.com/chef/automate/components/local-user-service/server"
 	"github.com/chef/automate/lib/logger"
 	"github.com/chef/automate/lib/tracing"
@@ -77,6 +80,26 @@ func serve(cmd *cobra.Command, args []string) error {
 
 	// use sugared logger here for convenience
 	l := logger.Sugar()
+
+	l.Infof("myconfig: %v", c)
+
+	//if c.Postgres.ConnectionString == "" {
+	//	var err error
+	//	log.Infof("Database %s", c.Postgres.Database)
+	//	c.Postgres.ConnectionString, err = platform_config.PGURIFromEnvironment(c.Postgres.Database)
+	//	log.Infof("Database connection string %s", c.Postgres.ConnectionString)
+	//	if err != nil {
+	//		log.WithError(err).Error("Failed to get pg uri")
+	//		return err
+	//	}
+	//}
+
+	l.Debug("getting db connection")
+	db, err := pgdb.New(&c.Postgres)
+	if err != nil {
+		log.WithError(err).Error("Creating postgres connection", db)
+		return err
+	}
 
 	if c.TeamsAddress == "" {
 		return errors.New("missing config value teams_address")

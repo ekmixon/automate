@@ -9,8 +9,11 @@ exec 2>&1
 # We do this here because init hooks block the hab supervisor
 DBNAME="{{cfg.storage.database}}"
 
+echo "------------   config-mgmt - ensure-service-database => $DBNAME ------------"
 pg-helper ensure-service-database "$DBNAME"
+echo "------------   config-mgmt - create-extension => $DBNAME ------------"
 pg-helper create-extension "$DBNAME" "pgcrypto"
+echo "------------   config-mgmt - fix-permissions => $DBNAME ------------"
 pg-helper fix-permissions "$DBNAME"
 
 # Start our service

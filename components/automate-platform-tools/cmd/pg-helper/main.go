@@ -353,6 +353,8 @@ func renameDBIfExists(_ *cobra.Command, args []string) error {
 // accounts for possible previous mistakes such as a database user
 // with a password or database tables not owned by the user.
 func createDB(_ *cobra.Command, args []string) error {
+	logrus.Infof("trying to get db client %s with opts %v", args[0], opts)
+
 	pgsClient, ctx, cancel, err := pgsClient()
 	defer cancel()
 	if err != nil {
@@ -370,6 +372,7 @@ func createDB(_ *cobra.Command, args []string) error {
 		return ErrUserRequired
 	}
 
+	logrus.Infof("trying to create db %s with user %s", args[0], user)
 	_, err = pgsClient.CreateDB(ctx, &pgs.CreateDBReq{
 		Db:   args[0],
 		User: user,
