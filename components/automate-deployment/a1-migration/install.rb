@@ -28,7 +28,7 @@ require 'fileutils'
    }
   puts "*******************************"
   puts ENV['SERVER_VERSION']
-  ENV['SERVER_VERSION'] = '14.3.0'
+  ENV['SERVER_VERSION']
   puts ENV['AUTOMATE_VERSION']
 
   options['product_version'] = product['version'] if product['version']
