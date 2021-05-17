@@ -219,8 +219,6 @@ server.
 
 ### Configure Chef Infra Client to Use the Data Collector Endpoint in Chef Automate
 
-{{< warning >}} Chef version 12.12.15 or greater is required. {{< /warning >}}
-
 The data collector functionality is used by the Chef Infra Client to send node
 and converge data to Chef Automate. This feature works for Chef Infra Client, as well as both the default
 and legacy modes of `chef-solo`.
