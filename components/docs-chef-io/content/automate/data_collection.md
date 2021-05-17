@@ -12,28 +12,15 @@ gh_repo = "automate"
     weight = 20
 +++
 
-# Audit Cookbook + InSpec + Automate 2 Versions Support Matrix
+Data collection refers to configuring the Chef Infra Client to send either compliance scans or Chef Infra Client run reports to the Automate server. Sending these reports to Automate allows for an aggregate view of infrastructure and compliance state within your organization across multiple Chef Infra Servers or Chef Infra Server organizations.
 
-Refer to the [following Supported Versions list](https://github.com/chef-cookbooks/audit#chef-automate) to confirm a full set of working versions for your chef-client, Audit cookbook, InSpec, and Automate 2. When these do not match up, ingestion problems can occur because the messages will not show up in the expected format.
+## Configuring Data Collection
 
-# Node Run and Audit Data Collection
+### Generating API Tokens
 
-Nodes can send their run data to Chef Automate.
-There are two steps to getting data collection running in Chef Automate:
+To generate an API token in Automate 2 see [Create a new API token]({{< relref "api_tokens.md#creating-api-tokens" >}}). If you are migrating from a legacy Automate 1.x installation see the migration steps below.
 
-1. You must first have an API token. You have two options:
-
-    * [Create a new API token]({{< relref "api_tokens.md#creating-api-tokens" >}}) and add the API token to the Ingest policy, preferably at time of creation.
-    * Or you can [use your existing data collector token]({{< relref "#existing-data-collector-token-setup" >}}) if you are migrating from Chef Automate 1.
-
-1. Once you have an API token, you can either:
-    * [Configure your Chef Infra Server to point to Chef Automate]({{< relref "#configure-your-chef-infra-server-to-send-data-to-chef-automate" >}}).
-    **If you are using Chef Infra Server, this is the recommended method of sending data to Chef Automate.**
-    * Or, you can have [Chef Infra Client send the data directly to Chef Automate]({{< relref "#configure-your-chef-client-to-send-data-to-chef-automate-without-chef-server" >}}).
-
-## Set Up an Existing Chef Automate 1 Data Collector Token in Chef Automate 2 {#existing-data-collector-token-setup}
-
-### Porting the Existing Chef Automate 1 Data Collector Token to Chef Automate 2
+#### Migrating Chef Automate 1 Data Collector Tokens {#existing-data-collector-token-setup}
 
 If you are migrating from Chef Automate 1, you probably have already deployed a data collector token on either your Chef Infra Servers or your Chef Infra Clients.
 To re-use your existing data collector token from your Chef Automate 1 installation, you need to perform the configuration change outlined here.
@@ -69,13 +56,27 @@ Now that you have a valid API token, you'll need to
 if you are using a Chef Infra Server. Otherwise, you must
 [configure your Chef Infra Clients to send data directly to Chef Automate]({{< relref "#configure-your-chef-client-to-send-data-to-chef-automate-without-chef-server" >}}).
 
+## Sending Data to Automate
+
+Chef Infra Client sends data to Chef Automate in two different ways:
+
+- Chef Infra Clients communicating directly with Chef Automate
+- Chef Infra Clients proxying data collection through a Chef Infra Server, which communicates directly to Chef Automate.
+
+Unless you have specific requirements that dictate Chef Infra Clients communicating with Chef Automate directly, we highly recommend proxying data collection through Chef Infra Server as it offers the following advantages:
+
+- Eliminates the need to deploy Chef Automate data collection tokens to each Chef Infra Client.
+- Improves scalability by reducing the number of connections to the Chef Automate Server.
+- Simplifies token updates since the token is only configured on the Chef Infra Server.
+- Eliminates the need for firewall rules allowing communication between Chef Infra Client nodes and Chef Automate.
+
 ## Configure your Chef Infra Server to Send Data to Chef Automate
 
 {{< note >}} Multiple Chef Infra Servers can send data to a single Chef Automate server. {{< /note >}}
 
 In addition to forwarding Chef run data to Chef Automate, Chef Infra Server will send messages to Chef Automate whenever an action is taken on a Chef Infra Server object, such as when a cookbook is uploaded to the Chef Infra Server or when a user edits a role.
 
-In order to have Chef Infra Server send run data from connected Chef Infra Clients, set the data collection proxy attribute to `true`.
+To have Chef Infra Server send run data from connected Chef Infra Clients, set the data collection proxy attribute to `true`.
 
 ### Setting Up Data Collection on Chef Infra Server Deployed with the Chef Automate Installer
 
