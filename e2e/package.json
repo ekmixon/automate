@@ -9,7 +9,9 @@
     "cypress:local:flaky": "CYPRESS_BASE_URL=https://a2-dev.test CYPRESS_RUN_FLAKY=yes cypress open",
     "cypress:run": "cypress run",
     "cypress:record": "cypress run --record",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "prepublish": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -18,7 +20,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^4.1.0"
+    "cypress": "^4.11.0",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^4.1.0",
@@ -28,5 +31,6 @@
     "tslint": "^5.18.0",
     "typescript": "^2.9.2",
     "webpack": "^4.35.3"
-  }
+  },
+  "snyk": true
 }
