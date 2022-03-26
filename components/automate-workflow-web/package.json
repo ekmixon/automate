@@ -34,13 +34,14 @@
     "highlight.js": "=10.1.2",
     "jwt-decode": "^2.2.0",
     "keymaster": "=1.6.2",
-    "lodash": "=4.17.19",
+    "lodash": "4.17.20",
     "marked": "=0.7.0",
     "moment": "=2.24.0",
     "parse-diff": "=0.0.15",
     "reflect-metadata": "=0.1.8",
     "rxjs": "=5.0.0-beta.12",
-    "zone.js": "=0.6.26"
+    "zone.js": "=0.6.26",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "@types/core-js": "=0.9.35",
@@ -112,6 +113,9 @@
     "test:e2e:ci": "npm run test:e2e -- --browser=chrome",
     "install-webdriver": "./node_modules/protractor/bin/webdriver-manager update",
     "test": "make test",
-    "start": "make startdev"
-  }
+    "start": "make startdev",
+    "prepublish": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
+  },
+  "snyk": true
 }
