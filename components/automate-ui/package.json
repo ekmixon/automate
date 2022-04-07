@@ -84,7 +84,7 @@
     "codelyzer": "^6.0.0",
     "faker": "^5.4.0",
     "hock": "^1.4.1",
-    "htmlhint": "^0.14.2",
+    "htmlhint": "^0.16.2",
     "install": "^0.13.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~6.0.0",
