@@ -44,7 +44,7 @@
     "@ngrx/router-store": "11.0.1",
     "@ngrx/store": "11.0.1",
     "@ngrx/store-devtools": "11.0.1",
-    "@nguniversal/express-engine": "11.2.1",
+    "@nguniversal/express-engine": "12.1.2",
     "classlist.js": "^1.1.20150312",
     "core-js": "^3.9.1",
     "d3": "^6.6.0",
@@ -70,8 +70,8 @@
     "zone.js": "^0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.1102.5",
-    "@angular/cli": "^11.2.5",
+    "@angular-devkit/build-angular": "^16.1.0",
+    "@angular/cli": "^15.0.0",
     "@angular/compiler-cli": "^11.2.6",
     "@angular/language-service": "^11.2.6",
     "@types/faker": "^5.1.7",
@@ -84,7 +84,7 @@
     "codelyzer": "^6.0.0",
     "faker": "^5.4.0",
     "hock": "^1.4.1",
-    "htmlhint": "^0.14.2",
+    "htmlhint": "^0.15.2",
     "install": "^0.13.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~6.0.0",
