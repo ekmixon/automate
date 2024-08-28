@@ -96,7 +96,7 @@
     "uglify-js": "=2.7.5",
     "url-loader": "=0.5.7",
     "validate-npm-package-license": "=3.0.1",
-    "webpack": "=1.13.3",
+    "webpack": "5.94.0",
     "webpack-md5-hash": "=0.0.5",
     "webpack-merge": "=0.15.0"
   },
