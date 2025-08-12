@@ -71,7 +71,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1102.5",
-    "@angular/cli": "^11.2.5",
+    "@angular/cli": "^18.1.0",
     "@angular/compiler-cli": "^11.2.6",
     "@angular/language-service": "^11.2.6",
     "@types/faker": "^5.1.7",
@@ -88,7 +88,7 @@
     "install": "^0.13.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~6.0.0",
-    "karma": "~6.2.0",
+    "karma": "~6.3.4",
     "karma-chrome-launcher": "~3.1.0",
     "karma-cli": "^2.0.0",
     "karma-coverage": "^2.0.3",
